@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for 연습문제</title>
+</head>
+<body>
+    <!-- 문제 : input 태그에서 숫자를 입력하고 
+            확인 버튼을 누르면 해당하는 
+            합계를 구하여 확p태그에 출력하시오.
+            단, 무조건 1부터 합계를 구하시오 
+    -->
+    <div class="container">
+        <input type="number" id="num" placeholder="숫자입력">
+        <button onclick="run()">확인</button>
+        <p id="result"></p>
+    </div> 
+    
+    <script>
+        let sum=0;
+        let result = document.getElementById('result');
+        let runNum = document.getElementById('num');
+
+        function run(){
+            let runNum01 = Number(runNum.value);
+            // console.log(`runNum`);
+            for(let i=1; i<=runNum01; i++){
+                sum += i;
+            }
+            result.innerText = `합계: ${sum}`;
+        }
+
+    </script>
+
+</body>
+</html>

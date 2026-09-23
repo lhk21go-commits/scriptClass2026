@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>급여계산 연습문제</title>
+</head>
+<body>
+    <div class="container">
+        <h1>직원 근무시간 급여 계산</h1>
+        <label for="time">근무 시간 입력:
+          <input type="text" id="hours" placeholder="시간을 입력하세요 ">
+        </label>
+        <button onclick="salary()">급여 계산</button>
+        <p id="salaryR"></p>
+        <p id="workmsg"></p>
+        <p id="paymsg"></p>
+        <!-- <p>급여:50000원</p>
+        <p>근무 메시지:정상 근무</p>
+        <p>급여 상태:급여 있음</p> -->
+        
+    </div>
+    <script>
+        let hour = document.getElementById('hours');
+        let salaryR = document.getElementById('salaryR');
+        let workmsg = document.getElementById('workmsg');
+        let paymsg = document.getElementById('paymsg');
+
+        function salary(){
+           let workHour = Number(hour.value);
+           let hourDefault = 10000;
+
+           let payment;
+           if(workHour <= 8){
+            payment = workHour * hourDefault;
+           }else{
+            payment = (8*hourDefault)+(workHour-8)+(hourDefault*1.5);
+           }
+           salaryR.innerText=`급여 : ${payment}원`;
+         
+           switch(true){
+            case workHour == 0:workmsg.innerText='출근하지 않았습니다.' ; break;
+            case workHour <= 8:workmsg.innerText='정상 근무' ;break;
+            case workHour > 8:workmsg.innerText='초과 근무';break;
+            }
+           paymsg.innerText = workHour == 0 ? '무급' : '급여 있음';
+
+        }
+
+    </script>
+
+    
+</body>
+</html>
