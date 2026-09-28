@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span{
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>투표 결과</h1>
+    <button onclick="countVote()">투표 집계</button>
+    <div id="output"></div>
+
+    <script>
+        let names = ['철수','영희','민수'];
+        let votes = [120, 150, 90];
+        let result = '';
+        let first = 0;
+        let output = document.getElementById('output');
+        function countVote(){
+            let temp = 0;
+            for(let i=0; i<names.length; i++){
+                if(votes[i]>temp){
+                    temp = votes[i];
+                    first=i;
+                    console.log(`first:${first}`);
+                    console.log(`temp:${temp}`);
+                }
+            }
+            for(let i=0; i<names.length; i++){
+                if(first==i){
+                    result += `${names[first]} : ${votes[first]}표<span> 1등</span><br/>`;
+                }else{
+                    result += `${names[i]} : ${votes[i]}표<br/>`;
+                }
+            }
+            output.innerHTML = result;
+
+
+        }
+
+    </script>
+    
+</body>
+</html>

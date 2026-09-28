@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>직원 근무시간 급여 계산</h1>
+    <label for="hours">근무 시간 입력:</label>
+    <input type="number" id="hours" placeholder="시간을입력하세요" />
+    <button onclick="chkPay()">급여 계산</button>
+    <p id="payment"></p>
+    <p id="workmsg"></p>
+    <p id="payStatus"></p>
+
+    <script>
+        let timePrice = 10000;
+        let num = document.getElementById('hours');
+        let print01 = document.getElementById('payment');
+        let print02 = document.getElementById('workmsg');
+        let print03 = document.getElementById('payStatus');
+
+        function chkPay(){
+            let workHour = Number(num.value);
+            let total = 0;
+            if(workHour>=0 && workHour<=8){
+                total = timePrice * workHour;
+            }else if (workHour>8){
+                total = (workHour-8)*1.5*timePrice + 80000;
+            }else{
+                print01.innerText=`잘못된 입력입니다. 다시 입력하세요`;
+                return;
+            }
+            print01.innerText = `급여: ${total.toLocaleString()}원`
+            switch(true){
+                case(workHour==0) : print02.innerText = `근무 메세지 : 출근하지 않았습니다.`; break;
+                case(workHour>=1 && workHour<=8) : print02.innerText = `근무 메세지 : 정상 근무`; break;
+                case(workHour>8) : print02.innerText = `근무 메세지 : 초과 근무`; break;
+            }
+            (workHour==0)?print03.innerText=`무급` : print03.innerText=`급여 있음`
+
+        }
+
+
+
+    </script>
+
+
+
+</body>
+</html>

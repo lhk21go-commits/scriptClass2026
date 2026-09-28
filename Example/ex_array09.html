@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>배열 + for문 + if문 문제</h1>
+    <label for="input">2번 숫자 배열 입력 (예: 12, 7, 5, 20, 33, 18)</label>
+    <input type="text" id="input" />
+    <button onclick="chkOdd()">결과 확인</button>
+    <p id="check"></p>
+
+        <script>
+            let input = document.getElementById('input');
+            let print = document.getElementById('check');
+            let resultOdd = '';
+            let resultEven = '';
+            function chkOdd(){
+                let arr = input.value.split(',');
+                for(let i=0; i<arr.length; i++){
+                    if(arr[i]%2==0){
+                        resultEven += arr[i]+', ';
+                    }else{
+                        resultOdd += arr[i]+', ' ;
+                    }
+                }
+                print.innerText = `짝수:${resultEven.slice(0, -2)} / 홀수:${resultOdd.slice(0,-2)}`;
+            }
+
+        </script>
+    
+</body>
+</html>

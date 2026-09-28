@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <style>
+            .high{
+                color: red;
+            }
+            .low{
+                color: blue;
+            }
+            table{
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            tr, th, td{
+                border: 1px solid black;
+                padding: 5px;
+            }
+        </style>
+</head>
+<body>
+    <h1>상품 가격 비교</h1>
+    <button onclick="comparePrice()">상품 출력</button>
+    <div id="output"></div>
+    
+    <script>
+        let output = document.getElementById('output');
+        function comparePrice(){
+            let items = ['노트북','마우스','모니터','키보드'];
+            let prices = [120000,30000,80000,40000];
+            let result = `<table><tr><th>상품</th><th>가격</th><th>등급</th></tr>`;
+
+            for(let i=0; i<items.length; i++){
+                let rate = (prices[i]>=50000)?'고가':'저가';
+                let status = (prices[i]>=50000)?'high':'low';
+                result += `<tr><td>${items[i]}</td><td>${prices[i]}</td>
+                            <td><span class='${status}''>${rate}</sapn></td></tr>`;
+            }
+            output.innerHTML = result + '</table>';
+
+        }
+
+
+
+
+    </script>
+
+</body>
+</html>

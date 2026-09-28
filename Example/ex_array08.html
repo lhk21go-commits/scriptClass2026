@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>배열 +for문 + if문 문제</h1>
+    <label for="input">1번 점수 배열 입력 (예:95, 76, 80, 55, 100, 72):</label>
+    <input type="text" id="input" />
+    <button onclick="chkResult()">결과 확인</button>
+    <p id="result"></p>
+    
+    <script>
+        let input = document.getElementById('input');
+        let result = document.getElementById('result');
+        let value = '';
+        function chkResult(){
+            //input 값 가져오기
+            //구분자 기준으로 배열 만들기
+            let arr = input.value.split(',');
+            // console.log = `${arr}`;
+
+            for(let i=0; i<arr.length; i++){
+                if(arr[i]>=90){
+                    value += `${arr[i]}점: A,`;
+                }else if(arr[i]>=80){
+                    value += `${arr[i]}점: B,`;
+                }else if(arr[i]>=70){
+                    value += `${arr[i]}점: C,`;
+                }else{
+                    value += `${arr[i]}점: F,`;
+                }
+                // console.log(`value : ${value}`);
+            }
+            // 마지막 콤마 없애기
+            //------|-------|--------|--------|--------|-----
+//                -2       -1        0        1        2
+            value = value.slice(0,-1);   //음수 입력시 끝에서부터 자른다.
+            result.innerText = value;
+
+        }
+
+
+    </script>
+
+</body>
+</html>

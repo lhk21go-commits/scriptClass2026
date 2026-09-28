@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>실시간 재고 관리</h1>
+    <button onclick="render()">click</button>
+    <div id="output"></div>
+    
+    
+    <script>
+        let items = ['노트북','마우스','키보드'];
+        let quantity = [3, 3, 2];
+        let result = '';
+        let total = 0;
+        let output = document.getElementById('output');
+
+        function render(){
+            for(let i=0; i<items; i++){
+                if(quantity[i]>0){
+                    result += `${items[i]} : ${quantity[i]}개 
+                    <button onclick="minus()">-</button>; <button onclick="plus()">+</button>;`
+                    total += quantity[i];
+                }else{
+
+                }
+            }
+        output.innerHTML = `${result} <br/> 총 재고 : ${total}개`;
+        }
+    </script>
+    Real_array05.html real = new Real_array05;
+    real.render();
+    
+</body>
+</html>
