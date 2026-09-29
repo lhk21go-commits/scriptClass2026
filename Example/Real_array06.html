@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습문제-06</title>
+        <style>
+            .output{
+                
+            }
+            .row{
+                margin: 10px 0;
+            }
+            #outof{
+                color: red;
+                font-weight: bold;
+            }
+            #price{
+                color: green;
+                font-weight: bold;
+            }
+
+
+
+        </style>
+
+</head>
+<body>
+    <h2>장바구니</h2>
+    <div id="output"></div>
+
+
+    <script>
+        let product = ['티셔츠','양말','모자'];
+        let price = [15000, 3000, 12000];
+        let quantity = [1, 1, 1,];
+        let output = document.getElementById('output');
+
+        function count(){
+            let result = '';
+            let total = 0;
+            let sum=0;
+            for(let i=0; i<product.length; i++){
+                sum = price[i] * quantity[i];
+                // 삼항연산자 이용
+                // let 변수 =  >0 ?    : `<span class='stockR'>품절</span>`
+                (quantity[i]==0)?
+                   result += `<div class="row">${product[i]}(${price[i].toLocaleString()}원)
+                         X ${quantity[i]} = <span id="outof">품절</span>
+                    <button onclick="minus(${i})">-</button>
+                    <button onclick="plus(${i})">+</button>
+                    </div>`
+                    // total += sum;
+                    :
+                    result += `<div class="row">${product[i]}(${price[i].toLocaleString()}원)
+                          X ${quantity[i]} = <span id="sum">${sum.toLocaleString()}원</span>
+                     <button onclick="minus(${i})">-</button>
+                     <button onclick="plus(${i})">+</button>
+                     </div>`
+                     total += sum;
+                }
+
+            result += `<span id="price">총 합계 : ${total.toLocaleString()}원</span>`;
+            output.innerHTML = result;
+        }
+        count();
+        function minus(i){
+            if(quantity[i]>0){
+                quantity[i]--;
+            }else{
+                quantity[i]==0;
+            }
+            count();
+        }
+        function plus(i){
+            quantity[i]++;
+            count();
+        }
+
+
+    </script>
+    
+</body>
+</html>

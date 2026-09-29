@@ -6,33 +6,58 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>실시간 재고 관리</h1>
-    <button onclick="render()">click</button>
+    <h2>실시간 재고 관리</h2>
     <div id="output"></div>
     
     
     <script>
-        let items = ['노트북','마우스','키보드'];
-        let quantity = [3, 3, 2];
-        let result = '';
-        let total = 0;
+        //상품, 재고자료를 배열로 생성
+        let product = ['노트북','마우스','키보드'];
+        let stocks = [3, 3, 2];
         let output = document.getElementById('output');
 
+        //render()함수 생성
+        //render()함수안에 HTML 화면 그리는 기능 작성
         function render(){
-            for(let i=0; i<items; i++){
-                if(quantity[i]>0){
-                    result += `${items[i]} : ${quantity[i]}개 
-                    <button onclick="minus()">-</button>; <button onclick="plus()">+</button>;`
-                    total += quantity[i];
-                }else{
+            //태그를 저장하는 변수 생성
+            let result = '';
+            //총 개수를 저장하는 변수 생성
+            let total = 0;
+            //반복문을 이용하여 product, stocks에 HTML을 그린다.
+            //<div>노트북 : <span>3</span>개 [-][+]</div>
 
-                }
+            for(let i=0; i<product.length; i++){
+                result += `<div class='row'>${product[i]} : <span>${stocks[i]}개</span> 
+                            <button onclick='minus(${i})'>-</button>
+                            <button onclick='plus(${i})''>+</button></div>`
+                    total += stocks[i];
             }
-        output.innerHTML = `${result} <br/> 총 재고 : ${total}개`;
+            result += `<div>총 재고 : ${total}개`
+        output.innerHTML = result;
         }
+
+        //처음 스크립트를 실행하면 화면을 그려야하기 때문에 반드시 render()호출
+        render();
+
+        //minus 버튼 함수 생성
+        function minus(i){
+            //재고수량이 0보다 클때만 마이너스 
+            if(stocks[i]>0){
+                stocks[i]--;
+            }
+            //메모리에서는 계산되지만 HTML화면에서 업데이트 되지 않는다.
+            console.log(stocks);    
+            //HTML화면을 다시 그려야 한다.
+            render();
+        }
+        function plus(i){
+            stocks[i]++;
+            render();
+        }
+
+
     </script>
-    Real_array05.html real = new Real_array05;
-    real.render();
+
     
 </body>
 </html>

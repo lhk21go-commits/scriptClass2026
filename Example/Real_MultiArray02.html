@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실무 2차원 배열 연습문제</title>
+        <style>
+
+        </style>
+</head>
+<body>
+
+        <h3>2. 성적표 (총점과 평균 계산)</h3>
+        <div id="grades"></div>
+    </div>
+
+    <script>
+        let scores = [
+                [85,90,80],
+                [70,60,75],
+                [95,100,90]
+        ];
+        let grades = document.getElementById('grades');
+        let total = 0;
+        let avg = 0;
+        let colResult = '';
+        let rowResult = '';
+       
+            for(let i=0; i<scores.length; i++){
+                total = 0;
+                avg = 0;
+                colResult = '';
+                for(let j=0; j<scores[i].length; j++){
+                    if(j<(scores[i].length-1)){
+                        colResult += scores[i][j]+', ' ;
+                    }else{
+                        colResult += scores[i][j];
+                    }
+                    total += scores[i][j];
+                    avg = (total/(j+1)).toFixed(2);
+                }
+                rowResult += `학생 ${i+1}: ${colResult} | 총점 : ${total} 평균 : ${avg} <br/>`;
+        }
+        console.log(rowResult)
+        grades.innerHTML = rowResult
+
+    </script>
+    
+</body>
+</html>

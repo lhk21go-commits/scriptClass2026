@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실무 2차원 배열 연습문제</title>
+        <style>
+
+        </style>
+</head>
+<body>
+
+        <h1>상품 재고 현황</h1>
+        <div id="stocks"></div>
+    </div>
+
+    <script>
+        let stock = [
+                [10,5,8,12],    //과일
+                [20,15,18,25],  //음료
+                [30,25,28,15]   //간식
+        ];
+        let stocks = document.getElementById('stocks');
+        let sum = 0;
+        let total = 0;
+        let colResult = '';
+        let rowResult = '';
+        for(let i=0; i<stock.length; i++){
+            sum = 0;
+            colResult = '';
+            for(let j=0; j<stock[i].length; j++){
+                if(j<(stock[i].length-1)){
+                    colResult += stock[i][j]+', ' ;
+                }else{
+                    colResult += stock[i][j];
+                }
+                sum += stock[i][j];
+            }
+            total += sum;
+            rowResult += `카테고리 ${i+1} : ${colResult} | 총재고 : ${total} <br/>`;
+        }
+        console.log(rowResult)
+        stocks.innerHTML = rowResult
+        // console.log(result);
+
+    </script>
+    
+</body>
+</html>

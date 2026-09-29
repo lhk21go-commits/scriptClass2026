@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2차원 기초배열 연습문제</title>
+</head>
+<body>
+    
+    <script>
+        //예제1
+        let arr = Array.from(Array(3), () => new Array(3).fill(0));
+        for(let i=0; i<arr.length; i++){
+            arr[i][i] = 1;
+        }
+        // for(let i=0; i<arr.length; i++){
+        //     for(let j=0;j<arr[i].length; j++){
+        //         if(i==j){
+        //             arr[i][j] = 1;
+        //         }
+        //         console.log(`arr[i][j] = ${arr[i][j]}`);
+        //     }
+        // }
+        console.log(arr);
+        
+        //예제2
+        let arr02 = Array.from(Array(2), () => new Array(4).fill(0));
+        // console.log(arr02);
+        let count = 1;
+        for(let i=0; i<arr02.length; i++){
+            for(let j=0;j<arr02[i].length; j++){
+                arr02[i][j] = count;
+                count++;
+                // console.log(`arr02[i][j] = ${arr[i][j]}`);
+            }
+        }
+        console.log(arr02);
+
+        //예제 3
+        let arr03 = Array.from(Array(4), () => new Array(4).fill(1));
+        // console.log(arr03)
+        for(let i=1; i<=arr03.length; i++){
+            for(let j=1;j<=arr03[i].length; j++){
+                if(j%2==0){
+                    arr03[i][j] = 1;
+                }
+            }
+        }
+        console.log(arr03);
+
+
+
+    </script>
+
+
+</body>
+</html>

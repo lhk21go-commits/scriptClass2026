@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>문제:arr for문 + if문 25 이상 출력</h1>
+    <p id="output"></p>
+
+    <script>
+        let arr2 = [10,20,30,40];
+        let output = document.getElementById('output');
+        // output.innerHTML = `4번: ${names}`;
+        let result = '';
+        for(let i=0; i<arr2.length; i++){
+            if(arr2[i]>=25){
+            result += arr2[i] + " ";
+            }
+        }
+        output.innerHTML = `15번: ${result}`;
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실무 2차원 배열 연습문제</title>
+        <style>
+            table{
+                border-collapse: collapse;
+                width: 500px;
+                height: 300px;
+                text-align: center;
+                border: 1px solid black;
+                box-shadow: 5px 5px 10px;
+            }
+            tr, th, td{
+                border: 1px solid black;
+            }
+            th{
+                font-size: 17px;
+            }
+
+        </style>
+</head>
+<body>
+
+    <h2>3. 달력 만들기(6X7)</h2>
+    <div class="container">
+        <div id="calendar"></div>
+    </div>
+
+    <script>
+        //1 ~ 25까지 숫자를 2차원 배열에 출력
+        //innerHTML 메소드 이용
+        let arr = Array.from(Array(6), () => new Array(7).fill(0));
+        // console.log(arr);
+        let weekdays = ['일','월','화','수','목','금','토'];
+        let calendar = document.getElementById('calendar');
+        let count = 1;
+        let result = '';
+        result += `<table><tr>`;
+        for(let j=0; j<arr[0].length; j++){
+            arr[0][j] = weekdays[j];
+            result += `<th>${arr[0][j]}</th>`;
+        }
+        result += `</tr>`;
+        // console.log(arr)
+        for(let i=1; i<arr.length; i++){
+            result += `<tr>`
+            for(let j=0; j<arr[i].length; j++){
+                if(count<=31){
+                    arr[i][j] = count;
+                    count++;
+                    result += `<td>${arr[i][j]}</td>`
+                }else{
+                    arr[i][j] = "";
+                    result += `<td>${arr[i][j]}</td>`
+                }
+            }
+            result += `</tr>`
+        }
+        // // console.log(arr)
+        result +=`</table>`;
+        calendar.innerHTML = result;
+        // // console.log(result);
+
+    </script>
+    
+</body>
+</html>
