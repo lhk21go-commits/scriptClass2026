@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코어객체</title>
+</head>
+<body>
+
+    <script>
+        //자바스크립트 객체 종류
+        //1. 코어 객체(Core/Built-in Object)
+        //  => 자바스크립트에 내장된 객체
+        //  => Array, String, Math(Math.random())
+        //2. DOM 객체(Document Object Model)
+        //  => HTML의 요소들을 접근하고 제어하기 위한 객체
+        //  => document, getElementById(), querySelector()
+        //3. BOM 객체(Brower Object Model)
+        //  => 웹 브라이저 전체를 제어하는 객체
+        //  => window, location, navigator, history, ...
+
+        let today = new Date(); //코어 개체는 반드시 new로 생성한다.
+        console.log(`today 오늘날짜 : ${today}`);
+        //today 오늘날짜 : Wed Sep 30 2026 09:54:58 GMT+0900 (한국 표준시)
+        console.log(typeof today);  //object
+
+        let oneDate = new Date(86400000);
+        // 1초 = 1,000ms
+        // 1분  = 60 * 1000 = 60,000ms
+        // 1시간 = 60 * 60000 = 3,600,000ms
+        // 1일 = 24 * 36000000 = 86,400,000ms
+        // 1970-1-1 + 1(1일)
+        //oneDate : Fri Jan 02 1970 09:00:00 GMT+0900 (한국 표준시)
+        console.log(`oneDate : ${oneDate}`);
+
+        //Date(인수) => 인수는 날짜와 시간을 문자열로 입력
+        let date01 = new Date('september 08,2025,14:10:00');
+        //date01 : Mon Sep 08 2025 14:10:00 GMT+0900 (한국 표준시)
+        console.log(`date01 : ${date01}`);
+        
+        let date02 = new Date('2025/09/08/14:10:00');
+        //date02 : Mon Sep 08 2025 14:10:00 GMT+0900 (한국 표준시)
+        console.log(`date02 : ${date02}`);
+        
+        let date03 = new Date(2025, 8);
+        //자바스크립트에서 월 : 0 ~ 11, 8은 9월을 의미
+        //date03 : Mon Sep 01 2025 00:00:00 GMT+0900 (한국 표준시)
+        console.log(`date03 : ${date03}`);
+        
+        let date04 = new Date(2025, 8, 15);
+        //date04 : Mon Sep 15 2025 00:00:00 GMT+0900 (한국 표준시)
+        console.log(`date04 : ${date04}`);
+        
+        // Date객체를 생성한 것이 아니라 now()라는 메소드를 이용하여 now를 출력함
+        let now = Date.now()
+        //now : 56.78369897951547(기준부터 현재까지 누적시간)
+        //now() 메소드 => 1970-1-1 00:00:00(UTC)부터 지금까지 경과시간 의미
+        console.log(`now : ${now / 86400000 / 365}`);
+
+        // getFullYear(출력), setFullYear(수정).....
+        let today02 = new Date();
+        // 오늘 날짜의 년도만 출력
+        let year02 = today02.getFullYear();
+        //today02의 년도 추출 : 2026
+        console.log(`today02의 년도 추출 : ${year02}`)
+        //year02의 타입 : number
+        console.log(`year02의 타입 : ${typeof year02}`)
+
+        //setFullYear() => 년도 수정 => getFullYear()로 추출
+        let today03 = new Date();
+        today03.setFullYear(2001);
+        let year03 = today03.getFullYear();
+        console.log(`today03의 수정된 년도 : ${year03}`);
+
+        //오늘 날짜의 월만 출력
+        let today04 = new Date();
+        let month04 = today04.getMonth() + 1;   //0부터 시작하는 문제 해결
+        console.log(`today04의 월 : ${month04}`);
+        //today04의 월 : 9
+        let day04 = today04.getDate();
+        //today04의 일 : 30
+        console.log(`today04의 일 : ${day04}`);
+        let weekday04 = today04.getDay();
+        // today04의 요일 : 3
+        // 요일 : 일(0) ~ 토(6)
+        console.log(`today04의 요일 : ${weekday04}`);
+
+        let today05 = new Date();
+        let localToday= today05.toLocaleDateString();
+        //localToday : 2026. 9. 30.
+        console.log(`localToday : ${localToday}`)
+        let localTime = today05.toLocaleTimeString();
+        //localTime : 오전 10:47:38
+        console.log(`localTime : ${localTime}`);
+
+        //오늘날짜의 요일을 월, 화, 수...인 문자로 출력하시오
+        // let weekToday = '';
+        // switch(weekday04){
+        //     case 0: weekToday = '일'; break;
+        //     case 1: weekToday = '월'; break;
+        //     case 2: weekToday = '화'; break;
+        //     case 3: weekToday = '수'; break;
+        //     case 4: weekToday = '목'; break;
+        //     case 5: weekToday = '금'; break;
+        //     case 6: weekToday = '토'; break;
+        // }
+        // console.log(`weekToday : ${weekToday}`);
+        let today06 = new Date('2026. 9. 15');
+        let week = ['일','월','화','수','목','금','토'];
+        let weDay = today06.getDay();
+        console.log(`today06의 요일 : ${week[weDay]}요일`);
+        
+        //---------------------------------------------------
+        //document.write()는 웹 브라우저가 HTML문서를 로딩할 때 
+        //해당 위치의 원하는 텍스트, 또는 HTML 태그를 직접 출력해 주는 메소드
+        let today07 = new Date();
+        let week01 = ['일','월','화','수','목','금','토'];
+        let dayWeek = today07.getDay();
+        document.write(today07.getFullYear()+'년도 <br/>')
+        document.write(today07.getMonth()+'월 <br/>')
+        document.write(today07.getDate()+'일 <br/>')
+        document.write(today07.getHours()+'일 <br/>')
+        document.write(today07.getMinutes()+'일 <br/>')
+        document.write(today07.getSeconds()+'일 <br/>')
+
+        document.write(week01[dayWeek] + '요일 <br/>')
+
+
+    </script>
+</body>
+</html>

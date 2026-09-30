@@ -20,40 +20,7 @@
     </div>
 
     <script>
-        let names = ['홍길동','개나리','진달래'];
-        let subjects = ['국어','영어','수학'];
-        let scores = [
-                [85,90,78],  //홍길동
-                [92,88,95],  //개나리
-                [76,85,83]   //진달래
-        ];
-        let student = document.getElementById('student');
-        let subject = document.getElementById('subject');
-        let best = document.getElementById('best');
-        let studentTotal = 0;
-        let subjectTotal = 0;
-        let studentAvg = 0;
-        let subjectAvg = 0;
-        let studentResult = '';
-        let subjectResult = '';
-        let bestResult = '';
-        for(let i=0; i<scores.length; i++){
-            studentTotal = 0, subjectTotal=0;
-            rowResult01 = '', rowResult02 = '';
-            for(let j=0; j<scores[i].length; j++){
-                    studentTotal += scores[i][j];
-                    // subjectTotal +=
-                }
-                avg = (total/3).toFixed(1);
-                rowResult01 += `${names[i]} 총점:${studentTotal}, 평균:${studentAvg} <br/>`;
-                rowResult02 += `${subjects[i]} 평균:${subjectAvg} <br/>`;
-                studentResult += rowResult01;
-                subjectResult += rowResult02;
-            }
-            student.innerHTML = studentResult;
-            subject.innerHTML = subjectResult;
-            best.innerHTML = bestResult;
-        // console.log(result);
+
 
     </script>
     

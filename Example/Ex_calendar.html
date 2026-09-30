@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>달력 만들기</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 500px;
+            height: 300px;
+            text-align: center;
+            border: 1px solid black;
+            box-shadow: 5px 5px 10px;
+        }
+
+        th {
+            font-size: 17px;
+        }
+
+        .title {
+            font-size: 25px;
+            text-align: center;
+        }
+        .sun{
+            color: red;
+            font-weight: bold;
+        }
+        .sat{
+            color: blue;
+            font-weight: bold;
+        }
+        .btn{
+            width: 300px;
+            text-align: center;
+        }
+        .container{
+            width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+        }
+        .
+    </style>
+</head>
+
+<body>
+
+</body>
+<div class="container">
+    <div class="btn">
+    <button onclick="showBefore()"><</button>
+    <button onclick="showNext()">></button>
+    </div>
+    <div id="calendar"></div>
+    </div>
+
+        <script>
+            let calendar = document.getElementById('calendar');
+            let today = new Date();
+            //현재 년월일 산출
+            let presentYear = today.getFullYear();  //2026
+            let presentMonth = today.getMonth();  //8(9월) 출력 시 변환 필요 
+            let presentDay = today.getDate();   //30
+            let firstDayOfMonth = new Date(presentYear, presentMonth);
+            
+            //현재 월의 시작 요일 산출
+            let presentStartDay = firstDayOfMonth.getDay(); //2(수)
+            console.log(presentStartDay);
+            //현재 해당의 마지막 일자 산출
+            let result = '';
+
+            //
+            function display() {
+                let lastDayOfMonth = (new Date(presentYear, (presentMonth + 1), 0)).getDate();  //30
+                let week = ['일', '월', '화', '수', '목', '금', '토'];
+                let dayCount = 1;
+                result += `<p id=title>${presentYear}년${presentMonth + 1}월</p>`;
+                result += `<table><tr>`;
+                //날짜 표시 2차원 배열
+                let cal = Array.from(Array(7), () => new Array(7).fill(0));
+
+                console.log(cal);
+                //요일 표시 
+                for (let i = 0; i < week.length; i++) {
+                    if (i == 0) {
+                        result += `<td class="sun">${week[i]}</td>`;
+                    }else if (i == 6) {
+                        result += `<td class="sat">${week[i]}</td>`;
+                    }else{
+                        result += `<th>${week[i]}</th>`;
+                    }
+                }
+                result += `</tr>`;
+                // 월의 날짜 표시
+                for (let i = 0; i < cal.length; i++) {
+                    result += `<tr>`;
+
+                    console.log(typeof cal[i].length)
+                    for (let j = 0; j < cal[i].length; j++) {
+                        //월의 첫번째 요일부터 시작하기
+                        if (i == 0 && j < presentStartDay) {
+                            result += `<td></td>`;
+                        } else if (dayCount > lastDayOfMonth) {
+                            result += `<td></td>`;
+                        } else {
+                            if (j == 0) {
+                                result += `<td class="sun">${dayCount}</td>`;
+                                dayCount++;
+                            }else if (j == 6) {
+                                result += `<td class="sat">${dayCount}</td>`;
+                                dayCount++;
+                            }else{
+                                result += `<td>${dayCount}</td>`;
+                                dayCount++;
+                            }
+                        }
+                    }
+                    result += `</tr>`;
+                }
+                result += `</table>`;
+                calendar.innerHTML = result;
+            }
+
+
+            display();
+
+            //이전 달 버튼
+            function showBefore() {
+                result = '';
+                //1월의 경우, 년을 변경
+                if (presentMonth == 0) {
+                    presentYear--;
+                    presentMonth = 11;
+                } else {
+                    presentMonth--;
+                }
+                firstDayOfMonth = new Date(presentYear, presentMonth);
+                presentStartDay = firstDayOfMonth.getDay(); //2(수)           presentStartDay--;
+                display()
+            }
+            //다음 달 버튼
+            function showNext() {
+                result = '';
+                //12월의 경우, 년을 변경
+                if (presentMonth == 11) {
+                    presentYear++;
+                    presentMonth = 0;
+                } else {
+                    presentMonth++;
+                }
+                firstDayOfMonth = new Date(presentYear, presentMonth);
+                presentStartDay = firstDayOfMonth.getDay(); //2(수)           presentStartDay--;
+                display()
+            }
+
+
+
+        </script>
+
+</html>
