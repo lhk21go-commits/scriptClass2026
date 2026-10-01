@@ -5,35 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
         <style>
-            .pass{
-                color: green;
-            }
-            .nopass{
-                color: red;
-            }
+
         </style>
 </head>
 <body>
-    <h1>학생 성적표</h1>
-    <button onclick="run()">성적표 출력</button>
-    <p id="output"></p>
+
 
     <script>
-        let students = ['철수','영희','민수','수지','준호'];
-        let scores = [85,58,92,77,61];
-        let output = document.getElementById('output');
-        let result ='';
-        
-        function run() {
-            let resultArr = [];
-            for(let i=0; i<students.length; i++) {
-                (scores[i]>=60) ? resultArr.push(`<span class="pass">'합격'</span>`) : 
-                                        resultArr.push(`<span class="nopass">'불합격'</span>`) ;
-                result += `${students[i]} : ${scores[i]}점 - ${resultArr[i]}<br/>`;
-                console.log()
+        let now = new Date();
+        let weekString = ['일','월','화','수','목','금','토'];
+        document.write(now.getFullYear() + `년도<br/>`);
+        document.write(now.getMonth() + `월<br/>`);
+        document.write(now.getDate() + `일<br/>`);
+        let week = now.getDay();
+        for(let i=0; i<weekString.length; i++){
+            if(week == i){
+                document.write(weekString[i] + `요일<br/>`) 
             }
-            output.innerHTML = result;
         }
+        document.write(now.getTime() + `시<br/>`);
+        document.write(now.getMinutes() + `분<br/>`);
+        document.write(now.getSeconds() + `초<br/>`);
+        document.write(`${now.toLocaleDateString()}<br/>`);
+        document.write(`${now.toLocaleTimeString()}<br/>`);
+
+
     </script>
 
 

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>키오스크</title>
+    <link rel="stylesheet" href="kioskCafe.css">
+</head>
+<body>
+    <div class="container"> <!--  전체  --> 
+        <div class="left">   <!--  //화면 좌측  --> 
+            <p class="middle">원하시는 음료를 선택해 주세요</p>
+            <p class="small">Please choose the drink you want</p>
+            <p class="button">MENU</p>
+            <div id="left_up">   <!--  //좌측 상단(원하시는... / MENU)  --> 
+
+            </div>
+            <div id="left_down"> <!--  //좌측 하단(3행4열 메뉴)   -->
+
+            </div>
+        </div>
+        <div class="right"> <!--  //우측(주문 내역)  -->
+            <div class="outside">
+                <p class="middle">주문내역</p>
+                <div id="list">         
+                </div>
+            </div>
+
+        </div>
+        <div class="bottom"> <!--  //하단(총 금액/결제버튼)  -->
+            <p class="total">총 주문금액 : 00,000</p>
+            <span> | </span>
+            <button onclick="pay">현금결제</button>
+        </div>
+
+        <script>
+            let menus = [
+                { id: 0, name: '아메리카노', type: 'HOT', price: 1000,quantity:1 },
+                { id:1, name: '아메리카노', type: 'ICE', price: 1300,quantity:1 },
+                { id: 2, name: '바닐라라떼', type: 'HOT', price: 2500,quantity:1 },
+                { id: 3, name: '바닐라라떼', type: 'ICE', price: 2800,quantity:1 },
+                { id: 4, name: '연유라떼', type: 'HOT', price: 2500,quantity:1 },
+                { id: 5, name: '연유라떼', type: 'ICE', price: 2800,quantity:1 },
+                { id: 6, name: '카라멜마끼아또', type: 'HOT', price: 2800,quantity:1 },
+                { id: 7, name: '카라멜마끼아또', type: 'ICE', price: 3000,quantity:1 },
+                { id: 8, name: '카페모카', type: 'HOT', price: 3000,quantity:1 },
+                { id: 9, name: '카페모카', type: 'ICE', price: 3300,quantity:1 },
+                { id: 10, name: '딥카페라테', type: 'HOT', price: 3400,quantity:1 },
+                { id: 11, name: '딥카페라테', type: 'ICE', price: 3700,quantity:1 },
+                ];
+
+                // console.log(position);
+                let left_down = document.getElementById('left_down');
+                let list = document.getElementById('list');
+                function display(){
+                let position = Array.from(Array(3), () => new Array(4).fill(0));
+                let result = '';
+                let index = 0;
+                result += `<table>`;
+                    let menu = new Array(12); 
+                    for(let i=0; i<position.length; i++){
+                        result += `<tr class="row">`;
+                            for(let j=0; j<position[i].length; j++){
+                                menu[index] = `${menus[index].type}<br/>${menus[index].name}<br/>
+                                <p id='price'>${menus[index].price}</p>`;
+                                result += `<td id='btn' onclick='choose(${index})'>${position[i][j]=menu[index]}</td>`;                            
+                        index++;
+                    }
+                    result += `</tr>`;
+                };
+                console.log(result);
+                result += `</table>`;
+                left_down.innerHTML = result;
+
+            }
+            display();
+            console.log(index);
+            function choose(index){
+                let currentIndex = index;
+                let item = `<div id='item'>${menus[index].name}
+                            ${menus[index].quantity}개, 
+                            ${menus[index].price}원</div>
+                            <div id="btn">
+                                <td><button  onclick="plus(${index})">+</button></td>
+                                <td><button  onclick="minus(${index})">-</button></td>
+                                <td><button  onclick="del(${index})">X</button></td>
+                            </div><hr/>`;
+                let previousIndex = currentIndex;
+                if(previousIndex==currentIndex){
+                    plus(index);
+                }else{                            
+                    list.innerHTML += item;
+                }
+                currentIndex=0;                            
+            }
+            function plus(index){
+            if(menus[index].quantity<10){
+                menus[index].quantity++;
+                choose();
+            }else{
+                alert('더 이상 증가 불가능');
+                menus[index].quantity = 10;
+                choose();
+            }
+        };
+        function minus(index){
+            if(menus[index].quantity>1){
+                menus[index].quantity--;
+                choose();
+                alert('수량은 최소 1개 이상이어야 합니다.');
+            }else{
+                menus[index].quantity = 1;
+                alert('수량은 최소 1개 이상이어야 합니다.');
+                menus();
+            }
+        };
+        function del(index){
+            menus.splice(index,1);
+            choose();
+        }
+
+        </script>
+
+
+
+
+
+
+    </div>
+
+    
+</body>
+</html>

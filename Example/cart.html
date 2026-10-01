@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>장바구니</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>장바구니</h2>
+        <hr/>
+            <table id="cartTable">
+                <thead>
+                    <tr>
+                        <th>상품명</th>
+                        <th>가격</th>
+                        <th>수량</th>
+                        <th>합계</th>
+                        <th>조작</th>
+                    </tr>
+                </thead>
+            <tbody id="cartBody"></tbody> 
+
+
+
+            </table>
+            <div id="total">총 금액 :0원</div>
+    </div>
+
+    <script>
+        let cartList = [
+            { id: 1, name: '노트북', price: 1200000, quantity: 1 },
+            { id: 2, name: '마우스', price: 20000, quantity: 2 },
+            { id: 3, name: '키보드', price: 50000, quantity: 1 }
+        ];
+        console.log(cartList[0].name);
+        let cartBody = document.getElementById('cartBody');
+        let total = document.getElementById('total');
+        let sum = 0;
+        let chkbtn = 0;
+        function renderCart(){
+            let result = '';
+            result += `<tr>`;
+                for(let i=0; i<cartList.length; i++){
+                    result += 
+                        `<td>${cartList[i].name}</td><td>${cartList[i].price.toLocaleString()}</td>
+                         <td>${cartList[i].quantity}</td><td>${(cartList[i].price*cartList[i].quantity).toLocaleString()}</td>
+                         <div id="btn">
+                            <button  onclick="plus(${i})">+</button>
+                            <button  onclick="minus(${i})">-</button>
+                            <button  onclick="del(${i})">X</button>
+                         </div>
+                        </tr>`
+
+                    sum += cartList[i].price*cartList[i].quantity;
+               }
+
+                cartBody.innerHTML = result;
+                total.innerHTML = `총 금액 : ${sum.toLocaleString()}원`
+        }
+
+        renderCart();
+
+        function plus(index){
+            if(cartList[index].quantity<10){
+                cartList[index].quantity++;
+                renderCart();
+            }else{
+                alert('더 이상 증가 불가능');
+                cartList[index].quantity = 10;
+                renderCart();
+            }
+        };
+        function minus(index){
+            if(cartList[index].quantity>1){
+                cartList[index].quantity--;
+                renderCart();
+                alert('수량은 최소 1개 이상이어야 합니다.');
+            }else{
+                cartList[index].quantity = 1;
+                alert('수량은 최소 1개 이상이어야 합니다.');
+                renderCart();
+            }
+        };
+        function del(index){
+            cartList.splice(index,1);
+            renderCart();
+
+
+        };
+        
+    
+
+    </script>        
+
+    
+</body>
+</html>

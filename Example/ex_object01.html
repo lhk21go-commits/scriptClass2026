@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object 기초연습문제</title>
+</head>
+
+<body>
+    <p id="problem04"></p>
+
+    <script>
+        //문제1
+        //학생 객체 student를 만들고, 이름(name), 나이(age), 전공(major)을 속성으로 저장한 뒤
+        //console.log()로 출력하세요. 저장할 파일명은 Ex_Object01.html 로 작성하시오
+        let student = {
+            name: '김길동',
+            age: 28,
+            major: '컴공'
+        }
+        console.log('학생정보', student);
+
+        //문제2
+        //자동차 객체 car를 만들고, 브랜드(brand), 색상(color), 가격(price)을 저장하세요.
+        //이후 색상을 "검정색"으로 바꾸고, 가격을 3000으로 수정한 뒤 console.log()로 출력하세요.
+        //저장할 파일명은 Ex_Object02.html 로 작성하시오
+        let car = {
+            brand: 'Hyundai',
+            color: '흰색',
+            price: 2500
+        }
+        console.log('자동차 정보', car);
+        //객체 접근 방법 : 객체이름.property
+        car.color = '검정';
+        car.price = 3000;
+        console.log('자동차 정보', car);
+
+        //문제3
+        //상품 객체 item1, item2를 만들고 각각 이름(name), 가격(price), 수량(quantity)를 저장하세요.
+        //그 후 배열 cart에 넣고, 장바구니 총 금액을 console.log()로 구하세요. 
+        //저장할 파일명은 Ex_Object03.html 로 작성하시오            
+        let item1 = { name: '노트북', price: 1000, quantity: 1 };
+        let item2 = { name: '마우스', price: 50, quantity: 2 };
+        let cart = [item1, item2];   //오브젝트 배열
+
+        // 오브젝트 배열을 일명 '더미데이터'라 부른다.
+        // 오브젝트 배열에ㅓㅅ 각 데이터 마다 식별자가 필요
+        // 식별자는 기본 id:0, id:1,.... 데이터베이스의 기본기(PK)와 같은 역할을 한다.
+        let cart2 = [
+            { id: 0, name: '노트북', price: 1000, quantity: 1 },
+            { id: 1, name: '마우스', price: 50, quantity: 2 }
+        ];
+        let sum = 0;
+        for (let i = 0; i < cart2.length; i++) {
+            sum += cart2[i].price * cart2[i].quantity;
+        }
+        console.log('장바구니 총계:', sum);
+
+        //문제4
+        let students = [
+            { name: '홍길동', kor: 90, eng: 80, math: 85 },
+            { name: '성춘향', kor: 95, eng: 88, math: 92 },
+            { name: '이몽룡', kor: 70, eng: 75, math: 80 }
+        ];
+        // console.log(students)
+        let sum04 = 0;
+        let avg04 = 0;
+        let print = document.getElementById("problem04");
+        for (let i = 0; i < students.length; i++) {
+            sum04 = students[i].kor + students[i].eng + students[i].math;
+            // console.log(sum04);
+            avg04 = (sum04 / 3).toFixed(2);
+            print.innerHTML += `${students[i].name}의 평균 점수:${avg04}<br/>`;
+        };
+
+    </script>
+</body>
+
+</html>
