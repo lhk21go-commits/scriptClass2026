@@ -14,7 +14,7 @@
             color: #222;
             padding-bottom: 12px;
             /* 밑줄 투명하게 CSS */
-            border-bottom: 4px solid transparent;
+            /* border-bottom: 4px solid transparent; */
         }
         ul{
             list-style: none;
@@ -27,6 +27,7 @@
             margin: 0 auto;
         }
         #menu_wrap a.active{
+            border-bottom: 4px solid blue;
             border-bottom-color: #222;
         }
 
@@ -38,8 +39,8 @@
 </head>
 <body>
 
-    <nav id="menu_wrap">
-        <ul>
+    <nav >
+        <ul id="menu_wrap">
             <li><a href="#">베스트</a></li>
             <li><a href="#">세일</a></li>
             <li><a href="#">패션</a></li>
@@ -54,30 +55,34 @@
         let menuList = document.querySelectorAll('#menu_wrap a');
         console.log(`메뉴`,menuList);
 
-        menuList.forEach((item) =>{ //반복문
-            //a태그 모두 마우스 호버하고 싶다면
-            //addEventListener('이벤트 종류', () => {...})
-            item.addEventListener('click', () =>{
-                item.style.color = 'blue';
-            })
-            item.addEventListener('mouseenter', () =>{
-                //classList 속성은 태그에 class이름을 추가한다.
-                item.classList.add ('active');
-            })
-            item.addEventListener('mouseleave', () =>{
-                //classList.remove() 속성은 태그에 class이름을 추가한다.
-                item.classList.remove('active');
-            })
-        })
+        // let menuList = document.querySelectorAll('#menu_wrap a' )
+        // menuList.forEach((item) =>{ //반복문
+        //     //a태그 모두 마우스 호버하고 싶다면
+        //     //addEventListener('이벤트 종류', () => {...})
+        //     item.addEventListener('click', () =>{
+        //         item.style.color = 'blue';
+        //     })
+        //     item.addEventListener('mouseenter', () =>{
+        //         //classList 속성은 태그에 class이름을 추가한다.
+        //         item.classList.add ('active');
+        //     })
+        //     item.addEventListener('mouseleave', () =>{
+        //         //classList.remove() 속성은 태그에 class이름을 추가한다.
+        //         item.classList.remove('active');
+        //     })
+        // });
 
         for(let i=0; i<menuList.length; i++){
             menuList[i].addEventListener('click',()=>{
-                menuList.style.color='blue';
-            })
-            menuList[i].classList.add('mouseenter',()=>{
-                menuList.classList.remove('active');
+                menuList[i].style.color='blue';
             });
-        }
+            menuList[i].addEventListener('mouseenter', ()=>{
+                menuList[i].classList.add('active');
+            });
+            menuList[i].addEventListener('mouseleave',()=>{
+                menuList[i].classList.remove('active');
+            });
+        };
     </script>
 </body>
 </html>

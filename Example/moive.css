@@ -1,0 +1,123 @@
+@charset "utf-8";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: sans-serif;
+}
+.booking{
+    width: 900px;
+    border: 2px solid lightgray;
+    padding: 10px;
+}
+h1{
+    font-weight: 500;
+    width: 600px;
+    border-bottom: 2px solid black;
+    padding-bottom: 20px;
+    /* margin: 0 auto; */
+}
+.booking__wrapper{
+    display: flex;
+}
+.booking__left{
+
+}
+.booking__intialize{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.booking__left .btn {
+    width: 100px;
+    height: 35px;
+    border-radius: 5px;
+    margin: 5px;
+}
+.booking__inner-box{
+    width: 600px;
+    height: 500px;
+    border: 1px solid lightgray;
+    margin-right: 5px;
+    text-align: center;
+}
+.counter-group{
+    width: 600px;
+    height: 50px;
+    background-color: lightgray;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.counter-item{
+    display: flex;
+    align-items: center;
+}
+.counter-item button{
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    margin: 10px;
+}
+.booking__right{
+    width: 300px;
+    height: 545px;
+    background-color: rgb(54, 7, 7);
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 15px;
+    color: aliceblue;
+}
+.moive-wrap{
+    display: flex;
+}
+.movie-info{
+    width: 150px;
+    display: inline-block;
+    justify-content: center;
+    margin: 10px;
+}
+.movie-subwrap{
+    display: flex;
+}
+.movie-info__grade{
+    font-size: 25px;
+    font-weight: bold;
+    background-color: orangered;
+    text-align: center;
+    align-items: center;
+}
+.movie-info__title{
+    width: 100px;
+    font-size: 30px;
+}
+.schedule-info{
+    margin: 10px;
+}
+#date{
+    font-size: 15px;
+    color: white;
+    background-color: rgb(44, 4, 4);
+    width: 140px;
+    height: 25px;
+}
+img{
+    width: 80px;
+    height: 80px;
+}
+
+.booking__navigation{
+    display: flex;
+}
+.btn {
+    width: 150px;
+    height: 50px;
+    border: none;
+    font-size: 18px;
+}
+.btn--before{
+    background-color: gray;
+}
