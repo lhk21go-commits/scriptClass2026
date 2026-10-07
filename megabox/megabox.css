@@ -1,0 +1,579 @@
+@charset "utf-8";
+
+/* 기본 설정 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Malgun Gothic", "맑은 고딕", Arial, sans-serif;
+    background-color: #fff;
+    color: #222;
+    border-collapse: collapse;
+}
+
+/* 전체 영역 */
+.container {
+    width: 960px;
+    height: 535px;
+    margin: 28px auto;
+    border: 1px solid #333;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+/* -------------------------
+제목
+------------------------- */
+
+.title {
+    width: 100%;
+    height: 57px;
+    border-bottom: 2px solid #222;
+    margin: 0 10px;
+    padding-top: 3px;
+}
+
+.title h2 {
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 50px;
+}
+
+
+/* -------------------------
+왼쪽 영역
+------------------------- */
+
+.wrapLeft {
+    width: 674px;
+    height: 467px;
+    margin-left: 10px;
+    border-right: 1px solid #ddd;
+}
+
+/* 관람인원선택 */
+.intialize {
+    width: 663px;
+    height: 42px;
+    position: relative;
+    border-bottom: 1px solid #ddd;
+}
+
+.intialize > span {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 42px;
+}
+
+.intialize button {
+    position: absolute;
+    right: 0;
+    top: 5px;
+    
+    height: 31px;
+    padding: 0 10px;
+    
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    
+    font-size: 13px;
+    color: #444;
+    cursor: pointer;
+}
+
+.intialize button:hover {
+    background-color: #f5f5f5;
+}
+
+
+/* 좌석 선택 전체 */
+.seatDisplay {
+    width: 663px;
+    height: 428px;
+    border: 1px solid #ddd;
+}
+
+
+/* 인원 선택 */
+.seatCount {
+    width: 100%;
+    height: 45px;
+    
+    background-color: #f1f2f3;
+    
+    display: flex;
+    align-items: center;
+    
+    padding-left: 17px;
+    gap: 35px;
+}
+
+
+/* 성인 / 청소년 / 우대 */
+.adult,
+.youth,
+.special {
+    display: flex;
+    align-items: center;
+    height: 30px;
+}
+
+.adult > span,
+.youth > span,
+.special > span {
+    width: 48px;
+    font-size: 13px;
+    text-align: center;
+}
+
+
+/* +/- 버튼 */
+.adult button,
+.youth button,
+.special button {
+    width: 27px;
+    height: 24px;
+    
+    border: 1px solid #ccc;
+    background-color: #fff;
+    
+    font-size: 13px;
+    cursor: pointer;
+}
+
+
+/* 숫자 */
+.adult p,
+.youth p,
+.special p {
+    width: 25px;
+    height: 24px;
+    
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+
+    background-color: #fff;
+    
+    text-align: center;
+    line-height: 22px;
+
+    font-size: 13px;
+}
+
+
+/* -------------------------
+SCREEN / 좌석
+------------------------- */
+
+.seats {
+    width: 100%;
+    height: 380px;
+    position: relative;
+    
+    background-color: #fff;
+}
+
+.seats > p {
+    padding-top: 21px;
+    
+    text-align: center;
+    
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* 좌석표 */
+/* 좌석 표시 영역 */
+#seatStatus {
+    width: 310px;
+    height: 275px;
+    /* border: 1px solid red; */
+    
+    margin: 22px auto;
+    
+    /* display: grid;
+    grid-template-columns: repeat(10, 27px);
+    grid-auto-rows: 27px;
+    
+    gap: 0; */
+}
+/* 좌석표 */
+#seatStatus td { 
+    width: 26px;
+    height: 26px;
+    /* border: 1px solid #27b8df;    */
+    background-color: #777;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    
+    color: #fff;
+    text-align: center;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    
+    font-size: 12px;
+    
+    cursor: pointer;
+    /* border: 1px solid red; */
+}
+
+/* -------------------------
+   실제 좌석을 만들 경우
+   .seat 클래스를 사용
+   ------------------------- */
+   
+#seatStatus td:hover {
+    background-color: #555;
+}
+/* 좌석 선택시 */
+#seatStatus td.selected {
+    background-color: #7b3fb5;
+}
+/* 예매 완료  */
+#seatStatud td.reserved {
+    background-color: #eee;
+    color: #999;
+    cursor: default;
+}
+
+#seatStatud td.noSeat {
+    background-color: #eee;
+    color: #ddd;
+    cursor: default;
+}
+#seatStatud td.disabled {
+    background-color: #eee;
+    color: #4b9e35;
+    cursor: default;
+}
+
+
+/* -------------------------
+오른쪽 영역
+------------------------- */
+
+.wrapRight {
+    /* border: 2px solid red; */
+    width: 270px;
+    height: 467px;
+
+    background-color: #333;
+    color: #fff;
+
+    position: relative;
+}
+
+
+/* 영화 기본 정보 */
+.top-info {
+    width: 100%;
+    height: 73px;
+
+    padding: 15px 15px 0;
+
+    border-bottom: 1px solid #444;
+}
+
+.age {
+    display: inline-block;
+
+    width: 22px;
+    height: 22px;
+
+    margin-right: 7px;
+
+    background-color: #fff;
+    color: #e27638;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    text-align: center;
+    line-height: 22px;
+}
+
+.movieTitle {
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.theaterGrade {
+    display: inline-block;
+
+    margin-left: 30px;
+    margin-top: 4px;
+
+    color: #999;
+    font-size: 16px;
+}
+
+
+/* -------------------------
+   영화관 / 시간 / 포스터
+------------------------- */
+
+.second-info {
+    width: 100%;
+    height: 135px;
+
+    padding: 10px 15px;
+
+    position: relative;
+
+    border-bottom: 1px solid #444;
+}
+
+.movie-info {
+    width: 145px;
+}
+
+.movie-info span {
+    display: block;
+}
+
+.theaterName {
+    font-size: 13px;
+    margin-bottom: 3px;
+}
+
+.theaterNum {
+    font-size: 13px;
+    margin-bottom: 7px;
+}
+
+.date {
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+
+/* 상영시간 */
+#movieTime {
+    width: 128px;
+    height: 25px;
+
+    padding-left: 7px;
+
+    background-color: #222;
+    color: #fff;
+
+    border: 1px solid #111;
+
+    font-size: 12px;
+}
+
+
+/* 포스터 */
+.second-info img {
+    position: absolute;
+
+    right: 20px;
+    top: 10px;
+
+    width: 70px;
+    height: 100px;
+
+    object-fit: cover;
+}
+
+
+/* -------------------------
+   좌석 범례 / 선택 좌석
+------------------------- */
+
+.third-info {
+    width: 100%;
+    height: 155px;
+
+    display: flex;
+
+    padding: 15px;
+}
+
+
+/* 좌석 상태 */
+.seatIndex {
+    width: 115px;
+    height: 130px;
+
+    border-right: 1px solid #444;
+
+    padding-top: 3px;
+}
+
+.seatIndex label {
+    display: block;
+
+    height: 22px;
+
+    font-size: 11px;
+    color: #ddd;
+}
+
+.seatIndex label span {
+    display: inline-block;
+
+    width: 13px;
+    height: 13px;
+
+    margin-right: 5px;
+
+    text-align: center;
+    line-height: 13px;
+
+    color: #fff;
+}
+
+
+/* 범례 색상 */
+.seatIndex label:nth-child(1) span {
+    background-color: #7844a9;
+}
+
+.seatIndex label:nth-child(2) span {
+    background-color: #999;
+}
+
+.seatIndex label:nth-child(3) span {
+    background-color: #ddd;
+}
+
+.seatIndex label:nth-child(4) span {
+    background-color: #777;
+}
+
+.seatIndex label:nth-child(5) span {
+    background-color: #4b9e35;
+}
+
+
+/* 선택좌석 */
+.selectedSeats {
+    width: 110px;
+    padding-left: 20px;
+}
+
+.selectedSeats > p {
+    font-size: 11px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.seatNumber {
+    width: 80px;
+}
+
+#seatNo {
+    width: 80px;
+    height: 105px;
+
+    display: grid;
+    grid-template-columns: repeat(2, 35px);
+    gap: 5px;
+
+    color: #fff;
+}
+
+
+/* -------------------------
+   결제 금액
+------------------------- */
+
+.forth-info {
+    position: absolute;
+
+    left: 0;
+    bottom: 42px;
+
+    width: 100%;
+    height: 58px;
+
+    padding: 8px 15px;
+
+    border-top: 1px solid #444;
+}
+
+.forth-info > span {
+    font-size: 12px;
+}
+
+
+/* 최종결제금액 */
+.totalPrice {
+    display: flex;
+    align-items: center;
+
+    margin-top: 5px;
+    margin-bottom: 20px;
+    /* border: 1px solid red; */
+}
+
+.totalPrice > span:first-child {
+    font-size: 11px;
+}
+
+.totalPrice p {
+    margin-left: auto;
+
+    color: #27b8df;
+
+    font-size: 21px;
+}
+
+.totalPrice > span:last-child {
+    margin-left: 5px;
+
+    font-size: 12px;
+}
+
+
+/* -------------------------
+   이전 / 다음 버튼
+------------------------- */
+
+.bottom-btn {
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 42px;
+
+    display: flex;
+}
+
+.bottom-btn button {
+    width: 50%;
+    height: 42px;
+
+    border: none;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+.before {
+    background-color: #555;
+    color: #fff;
+}
+
+.next {
+    background-color: #eee;
+    color: #777;
+}
+
+.before:hover {
+    background-color: #444;
+}
+
+.next:hover {
+    background-color: #ddd;
+}

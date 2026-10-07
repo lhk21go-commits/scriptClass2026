@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MEGABOX</title>
+  <link rel="stylesheet" href="megabox.css">
+</head>
+<body>
+    <section class="container">
+        <div class="title">
+            <h2>빠른예매</h2>
+        </div>
+        <div class="wrapLeft">
+            <div class="intialize">
+                <span>관람인원선택</span>
+                <button onclick="initialize()">↻초기화</button>
+            </div>
+            <div class="seatDisplay">
+                <div class="seatCount">
+                    <div class="adult">
+                        <span>성인</span>
+                        <button onclick="adultMinus()">-</button>
+                        <p id="adultShowNum">0</p>
+                        <button onclick="adultPlus()">+</button>
+                    </div>
+                    <div class="youth">
+                        <span>청소년</span>
+                        <button onclick="youthMinus()">-</button>
+                        <p id="youthShowNum">0</p>
+                        <button onclick="youthPlus()">+</button>
+                    </div>
+                    <div class="special">
+                        <span>우대</span>
+                        <button onclick="specialMinus()">-</button>
+                        <p id="specialShowNum">0</p>
+                        <button onclick="specialPlus()">+</button>
+                    </div>
+                </div>
+                <div class="seats">
+                    <p>SCREEN</p>
+                    <div id="seatStatus">10X10 좌석 표시영역</div>
+                </div>
+            </div>
+        </div>
+        <div class="wrapRight">
+            <div class="top-info">
+                <span class="age">15</span>
+                <span class="movieTitle">화란</span><br>
+                <span class="theaterGrade">2D</span>
+            </div>
+            <div class="second-info">
+                <div class="movie-info">
+                    <span class="theaterName">강남대로(씨티)</span>
+                    <span class="theaterNum">1관</span>
+                    <span class="date">2023.10.16(월)</span>
+                    <select name="times" id="movieTime">
+                        <option value="" selected>20:50~23:04</option>
+                    </select>
+                </div>
+                <img src="images/movie01.jpg" alt="화란 포스트">
+            </div>
+            <div class="third-info">
+                <div class="seatIndex">
+                    <label for="select"><span>▢</span>선택</label>
+                    <label for="soldout"><span>▢</span>예매완료</label>
+                    <label for="noSelect"><span>▢</span>선택불가</label>
+                    <label for="normal"><span>▢</span>일반</label>
+                    <label for="disabled"><span>▢</span>장애인</label>
+                </div>
+                <div class="selectedSeats">
+                    <p>선택좌석</p>
+                    <div class="seatNumber">
+                        <div id="seatNo">선택 좌석 표시영역</div>
+                    </div>
+                </div>
+            </div>
+            <div class="forth-info">
+                <span>성인</span>
+                <div class="totalPrice">
+                    <span>최종결제금액</span>
+                    <p id="price">가격표시</p>
+                    <span>원</span>
+                </div>
+            </div>
+            <div class="bottom-btn">
+                <button class="before">이전</button>
+                <button class="next">다음</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let rows = ['A','B','C','D','E','F','G','H','I','J'];
+        let cols = [1,2,3,4,5,6,7,8,9,10];
+        let count = [0,0,0];
+        let sumCount =0; 
+            sumCount = count[0] + count[1] + count[2];
+        // let seats = Array.from(Array(10), () => new Array(10).fill('none'));
+        let status = Array.from(Array(10), () => new Array(10).fill(-1));
+        // 좌석표 생성
+        let seatStatus = document.getElementById('seatStatus');
+        function showMap(){
+            let result ='';
+            result += `<table>`;
+            for(let i=0; i<rows.length; i++){
+                result += `<tr><th>${rows[i]}&nbsp;&nbsp;&nbsp;&nbsp; </th>`;
+                for(let j=0; j<cols.length; j++){
+                    result += `<td onclick='getSeat(${i},${j})'>${cols[j]}</td>`;
+                    }
+                    result += `</tr>`;
+                }
+                result += `</table>`;
+                seatStatus.innerHTML = result;
+            }
+        // 인원선택(-)버튼
+            function adultMinus(){
+                if(count[0]==0){
+                    alert('최소인원은 1명 이상입니다.');
+                }else{
+                    count[0]--;
+                    let adultShowNum = document.getElementById('adultShowNum');
+                }
+                adultShowNum.innerHTML = count[0];
+            }
+            function youthMinus(){
+                if(count[1]==0){
+                    alert('최소인원은 1명 이상입니다.');
+                }else{
+                    count[1]--;
+                    let youthShowNum = document.getElementById('youthShowNum');
+                }
+                youthShowNum.innerHTML = count[1];
+            }
+            function specialMinus(){
+                if(count[2]==0){
+                    alert('최소인원은 1명 이상입니다.');
+                }else{
+                    count[2]--;
+                    let specialShowNum = document.getElementById('specialShowNum');
+                }
+                specialShowNum.innerHTML = count[2];
+            }
+        // 인원선택(+)버튼
+            function adultPlus(){
+                if(count[0]>=8 || sumCount>=8){
+                    alert('1인 최대예매수량(8)을 초과하였습니다.');
+                    count[0]=8;
+                }else{
+                count[0]++;
+                let adultShowNum = document.getElementById('adultShowNum');
+            }
+            adultShowNum.innerHTML = count[0];
+        }
+        // console.log(count[0]);
+            function youthPlus(){
+                if(count[1]>=8 || sumCount>=8){
+                    alert('1인 최대예매수량(8)을 초과하였습니다.');
+                    count[1]=8;
+                }else{
+                    count[1]++;
+                    let youthhowNum = document.getElementById('youthShowNum');
+                }
+                youthShowNum.innerHTML = count[1];
+            }
+            function specialPlus(){
+                if(count[2]>=8 || sumCount>=8){
+                    alert('1인 최대예매수량(8)을 초과하였습니다.');
+                    count[2]=8;
+                }else{
+                    count[2]++;
+                    let specialShowNum = document.getElementById('specialShowNum');
+                }
+                specialShowNum.innerHTML = count[2];
+            }
+            // 좌석선택
+        function getSeat(index1, index2){
+            result += `<table>`;
+            for(let i=0; i<rows.length; i++){
+                result += `<tr>`;
+                for(let j=0; j<cols.length; ji++){
+                    result += `<td class='selected'>`;
+
+                }
+            }
+            showMap()                                
+        }                    
+            
+            
+        showMap();
+            
+        function initialize(){
+            for(let i=0; i<count.length; i++){
+                count[i]=0;
+                adultShowNum.innerHTML = count[0];
+                youthShowNum.innerHTML = count[1];
+                specialShowNum.innerHTML = count[2];
+            }
+        }
+
+    </script>
+</body>
+</html>
