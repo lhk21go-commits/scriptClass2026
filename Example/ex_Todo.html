@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoList 연습문제</title>
+    <style>
+        .tody-container{
+            width: 400px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="todo-contaner">
+        <h1>할 일 목록</h1>
+        <div class="input-area">
+            <input type="text" id="task" placeholder="할 일 입력">
+            <button onclick="addTask()">추가</button>
+        </div>
+        <ul id="tasks"></ul>
+    </div>
+
+
+    <script>
+        function addTask() {
+            //부모의 ul태그 접근
+            let tasks = document.getElementById('tasks');
+            // input 태그에 접근 
+            let inputVal = document.getElementById('task').value;
+            // 빈값 입력 예외처리
+            if(inputVal == '') return;
+
+            // li 생성
+            let liList = document.createElement('li');
+            // 생성한 li에 입력할 텍스트 대입
+            liList.innerText = inputVal;
+            // ul의 부모에 자식으로 추가
+            // Li. = `<div class=print>${toDo}<span>X</span></div>`;
+            tasks.appendChild(liList);
+
+            //li안에 button 생성
+            let btn = document.createElement('button');
+            liList.appendChild(btn);
+            // 생성한 button에 class이름을 생성하는 프로퍼티 : className
+            btn.className = 'delbtn';
+            btn.innerText='X';
+
+            //btn을 클릭하면 삭제(익명함수)
+            btn.onclick = function(){
+                liList.remove();
+            }
+        }
+
+
+
+    </script>
+</body>
+</html>

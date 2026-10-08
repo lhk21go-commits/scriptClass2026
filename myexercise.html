@@ -5,42 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
         <style>
-            table, tr, td{
-                border: 1px solid black;
-                border-collapse: collapse;
-                text-align: center;
-                padding: 10px;
-            }
+
         </style>
 </head>
 <body>
     <div id="print"></div>
 
     <script>
-        const weekdays = ['일','월','화','수','목','금','토'];
-        let arr = Array.from(Array(6), () => new Array(7).fill(0));
-        let count = 1;
-        let result = '';
-        let print = document.getElementById('print');
-        result += `<table><thead><tr>`;
-        for(let i=0; i<arr.length; i++){
-            result += `<th>${weekdays[i]}</th>`;
-        }
-        result += `</tr><tr>`;
-        for(let i=0; i<arr.length; i++){
-            for(let j=0; j<arr[i].length; j++){
-                if(count<=31){
-                result += `<td>${arr[i][j] = count}</td>`
-                count++;
-                }else{
-                    break;
-                }
-            }
-            result += `</tr>`
-        }
-        result += `</table>`
-        print.innerHTML = result;
-
+        document.getElementById('print').textContent = 'DOM 조작 성공!'
     </script>
 
 
