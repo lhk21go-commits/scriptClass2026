@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>키오스크</title>
+    <link rel="stylesheet" href="kioskCafe.css">
+</head>
+<body>
+    <div class="container"> <!--  전체  --> 
+        <div class="wrapper">
+            <div class="left">   <!--  //화면 좌측  --> 
+                <div id="left_up">   <!--  //좌측 상단(원하시는... / MENU)  --> 
+                    <p class="middle">원하시는 음료를 선택해 주세요</p>
+                    <p class="small">Please choose the drink you want</p>
+                    <div class="menu-tab">
+                        <ul>
+                            <li><button class="menuBtn">전체</button></li>
+                            <li><button class="menuBtn">Coffee</button></li>
+                            <li><button class="menuBtn">Tea</button></li>
+                            <li><button class="menuBtn">Others</button></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="left_down"> <!--  //좌측 하단(3행4열 메뉴)   -->
+                    <ul id="menu-container" class="card"></ul>
+                </div>
+            </div>
+            <div class="right"> <!--  //우측(주문 내역)  -->
+                <p class="order-title">주문내역</p>
+                <div id="list"></div>
+            </div>
+        </div>
+        <div class="bottom"> <!--  //하단(총 금액/결제버튼)  -->
+            <div class="total-price" id="total_display"></div>
+            <button class="pay-btn" onclick="pay()">현금결제</button>
+        </div>
+    </div>
+
+    <!-- <추가 문제 및 수정사항>
+    키오스크 filter() 메소드 이용하여 [커피][드링크] 버튼을 생성한다.
+    1. 커피 버튼을 클릭하면 커피만, 드링크 버튼을 클릭하면 음료만 출력되도록 코드를 수정한다.
+    2. 오브젝트 배열의 음료는 커피와 동일하게 12개 입력한다.
+    3. 커피, 드링크 모두 주문에 담겨야 한다.
+    4. 메뉴 삭제시 삭제여부 확인하는 confirm() 메소드 사용
+     => confirm('삭제 하겠습니까?')가 출력되면
+      => 메세지에 [확인][취소] 버튼 2개가 출력되고 
+        [확인]버튼 클릭시 true가 반환되고
+        [취소]버튼 클릭시 false가 반환된다.
+    -->
+
+        <script>
+            //더미데이터
+            let menus = [
+                { id: 0, name: '아메리카노', type: 'HOT', price: 1000,quantity:1 ,img:'images/hot1.png', category: 1},
+                { id: 1, name: '아메리카노', type: 'ICE', price: 1300,quantity:1 ,img:'images/ice1.png', category: 1},
+                { id: 2, name: '바닐라라떼', type: 'HOT', price: 2500,quantity:1 ,img:'images/hot2.png', category: 1},
+                { id: 3, name: '바닐라라떼', type: 'ICE', price: 2800,quantity:1 ,img:'images/ice2.png', category: 1},
+                { id: 4, name: '연유라떼', type: 'HOT', price: 2500,quantity:1 ,img:'images/hot1.png', category: 1},
+                { id: 5, name: '연유라떼', type: 'ICE', price: 2800,quantity:1 ,img:'images/ice1.png', category: 1},
+                { id: 6, name: '카라멜마끼아또', type: 'HOT', price: 2800,quantity:1 ,img:'images/hot2.png', category: 1},
+                { id: 7, name: '카라멜마끼아또', type: 'ICE', price: 3000,quantity:1 ,img:'images/ice2.png', category: 1},
+                { id: 8, name: '카페모카', type: 'HOT', price: 3000,quantity:1 ,img:'images/hot1.png', category: 1},
+                { id: 9, name: '카페모카', type: 'ICE', price: 3300,quantity:1 ,img:'images/ice1.png', category: 1},
+                { id: 10, name: '딥카페라테', type: 'HOT', price: 3400,quantity:1 ,img:'images/hot2.png', category: 1},
+                { id: 11, name: '딥카페라테', type: 'ICE', price: 3700,quantity:1 ,img:'images/ice2.png', category: 1},
+                { id: 12, name: '아메리카노', type: 'HOT', price: 1000,quantity:1 ,img:'images/hot1.png', category: 1},
+                { id: 13, name: '아메리카노', type: 'ICE', price: 1300,quantity:1 ,img:'images/ice1.png', category: 2},
+                { id: 14, name: '바닐라라떼', type: 'HOT', price: 2500,quantity:1 ,img:'images/hot2.png', category: 2},
+                { id: 15, name: '바닐라라떼', type: 'ICE', price: 2800,quantity:1 ,img:'images/ice2.png', category: 2},
+                { id: 16, name: '연유라떼', type: 'HOT', price: 2500,quantity:1 ,img:'images/hot1.png', category: 2},
+                { id: 17, name: '연유라떼', type: 'ICE', price: 2800,quantity:1 ,img:'images/ice1.png', category: 2},
+                { id: 18, name: '카라멜마끼아또', type: 'HOT', price: 2800,quantity:1 ,img:'images/hot2.png', category: 3},
+                { id: 19, name: '카라멜마끼아또', type: 'ICE', price: 3000,quantity:1 ,img:'images/ice2.png', category: 3},
+                { id: 20, name: '카페모카', type: 'HOT', price: 3000,quantity:1 ,img:'images/hot1.png', category: 3},
+                { id: 21, name: '카페모카', type: 'ICE', price: 3300,quantity:1 ,img:'images/ice1.png', category: 3},
+                { id: 22, name: '딥카페라테', type: 'HOT', price: 3400,quantity:1 ,img:'images/hot2.png', category: 3},
+                { id: 23, name: '딥카페라테', type: 'ICE', price: 3700,quantity:1 ,img:'images/ice2.png', category: 3},
+                { id: 24, name: '카라멜마끼아또', type: 'ICE', price: 3000,quantity:1 ,img:'images/ice2.png', category: 4},
+                { id: 25, name: '카페모카', type: 'HOT', price: 3000,quantity:1 ,img:'images/hot1.png', category: 4},
+                { id: 26, name: '카페모카', type: 'ICE', price: 3300,quantity:1 ,img:'images/ice1.png', category: 4},
+                { id: 27, name: '딥카페라테', type: 'HOT', price: 3400,quantity:1 ,img:'images/hot2.png', category: 4},
+                { id: 28, name: '딥카페라테', type: 'ICE', price: 3700,quantity:1 ,img:'images/ice2.png', category: 4},
+                
+                ];
+
+            //주문상태(장바구니)
+             let cart =[]; // cart.push()
+            //  let menu-container = document.getElementById('menu-container');
+             let list = document.getElementById('list');
+             let total_display = document.getElementById('total_display');
+             let menuBtn = document.querySelectorAll('.menuBtn');
+             let cateNum = 0;
+             let filterMenu = menus.filter((item) => {
+                return item.category
+             })
+
+             console.log()
+             //메뉴화면 표시(3*4 표시는 CSS로 처리)
+             let result01 = '';  //메뉴화면 표시
+             function display(){
+
+                 let count = 0;
+                 for(let i=0; i<7; i++){
+                     result01 += `<ul>`;
+                        for(let j=0; j<4; j++){
+                            result01 += `<li onclick='choose(${count})'><img src="${menus[count].img}" alt="${menus[count].name}">
+                                <div class="menu-type">${menus[count].type}</div>
+                                <div class="menu-name">${menus[count].name}</div>
+                                <div class="menu-price">${menus[count].price}</div></li>`;  
+                                count++;                          
+                            }
+                            result01 += `</ul>`;
+                        }
+                        left_down.innerHTML = result01;
+                        getTotal();
+                    };
+                    
+                    display();
+            
+                function chooseMenu(cateNum){
+                    let filterMenu = menus.filter((item) =>{
+                        return item.category === cateNum;
+                    })
+
+                    display(cateNum);
+                }
+                    
+                    // 자바 check = -1; => 주문내역에 상품이 존재하는지 유무를 판단
+                    function choose(id){
+                        console.log(id);
+                        //동일 아이템 확인
+                        let check = -1;
+                        for(let i=0; i<cart.length; i++){
+                            if(cart[i].id == menus[id].id){
+                                check = i;
+                                break;
+                            }
+                        }
+                        
+                        //동일 아이템 확인 후 처리
+                        if(check !=-1){ //동일 아이템이 있는 경우
+                            cart[check].quantity++; //수량만 증가
+                            render();
+                            getTotal(check);
+                        }else{  //동일 아이템이 없는 경우
+                            cart.push(menus[id]);    //목록 추가
+                            render();
+                            getTotal(id);
+                        }
+                    }
+                    
+                    // 주문내역 상품 정보 그림그리기 함수
+                    function render(){
+                        let print ='';
+                        for(let i=0; i<cart.length; i++){
+                            // let sum = (cart.quantity*cart.price).toLocaleString;    //아이템 가격 합계
+                            print += `<div id='item'>${cart[i].name}(${cart[i].type})${cart[i].quantity}개, 
+                                ${(cart[i].quantity * cart[i].price).toLocaleString()}원</div>
+                                <div id="btn">
+                                    <span><button  onclick="minus(${i})">-</button></span>
+                                    <span><button  onclick="plus(${i})">+</button></span>
+                                    <span><button  onclick="del(${i})">X</button></span>
+                                    </div>` 
+                                }
+                                
+                                list.innerHTML = print;
+                                // getTotal(i);
+                            }
+                            // 총 주문금액 함수
+                function getTotal(i){
+                let total = 0; // 총 주문금액
+                            
+                for(let i=0; i<cart.length; i++){
+                    total += Number((cart[i].quantity * cart[i].price));
+                }
+                total_display.innerHTML = `총 주문금액 : <span class='total'>${total.toLocaleString()}</span>`;
+             }
+            // 플러스
+            function plus(i){
+                cart[i].quantity++;
+                getTotal(i);
+                render();
+            }
+            // 마이너스
+            function minus(i){
+                if(cart[i].quantity<=1){
+                    alert('현재 주문수량이 1입니다. 목록을 삭제하시려면 X를 누르세요');
+                }else{
+                    cart[i].quantity--;
+                    getTotal(i);
+                    render();
+                }
+            }
+            // 삭제
+            function del(i){
+                alert(`${cart[i].name}를(을) 목록에서 제거합니다.`);
+                cart.splice(i, 1);
+                getTotal(i);
+                render();
+            }
+
+        </script>
+
+
+
+
+
+
+    </div>
+
+    
+</body>
+</html>
