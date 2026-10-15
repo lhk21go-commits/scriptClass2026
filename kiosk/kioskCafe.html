@@ -15,10 +15,8 @@
                     <p class="small">Please choose the drink you want</p>
                     <div class="menu-tab">
                         <ul>
-                            <li><button class="menuBtn">전체</button></li>
                             <li><button class="menuBtn">Coffee</button></li>
-                            <li><button class="menuBtn">Tea</button></li>
-                            <li><button class="menuBtn">Others</button></li>
+                            <li><button class="menuBtn">Drink</button></li>
                         </ul>
                     </div>
                 </div>
@@ -65,23 +63,19 @@
                 { id: 9, name: '카페모카', type: 'ICE', price: 3300,quantity:1 ,img:'images/ice1.png', category: 1},
                 { id: 10, name: '딥카페라테', type: 'HOT', price: 3400,quantity:1 ,img:'images/hot2.png', category: 1},
                 { id: 11, name: '딥카페라테', type: 'ICE', price: 3700,quantity:1 ,img:'images/ice2.png', category: 1},
-                { id: 12, name: '아메리카노', type: 'HOT', price: 1000,quantity:1 ,img:'images/hot1.png', category: 1},
-                { id: 13, name: '아메리카노', type: 'ICE', price: 1300,quantity:1 ,img:'images/ice1.png', category: 2},
-                { id: 14, name: '바닐라라떼', type: 'HOT', price: 2500,quantity:1 ,img:'images/hot2.png', category: 2},
-                { id: 15, name: '바닐라라떼', type: 'ICE', price: 2800,quantity:1 ,img:'images/ice2.png', category: 2},
-                { id: 16, name: '연유라떼', type: 'HOT', price: 2500,quantity:1 ,img:'images/hot1.png', category: 2},
-                { id: 17, name: '연유라떼', type: 'ICE', price: 2800,quantity:1 ,img:'images/ice1.png', category: 2},
-                { id: 18, name: '카라멜마끼아또', type: 'HOT', price: 2800,quantity:1 ,img:'images/hot2.png', category: 3},
-                { id: 19, name: '카라멜마끼아또', type: 'ICE', price: 3000,quantity:1 ,img:'images/ice2.png', category: 3},
-                { id: 20, name: '카페모카', type: 'HOT', price: 3000,quantity:1 ,img:'images/hot1.png', category: 3},
-                { id: 21, name: '카페모카', type: 'ICE', price: 3300,quantity:1 ,img:'images/ice1.png', category: 3},
-                { id: 22, name: '딥카페라테', type: 'HOT', price: 3400,quantity:1 ,img:'images/hot2.png', category: 3},
-                { id: 23, name: '딥카페라테', type: 'ICE', price: 3700,quantity:1 ,img:'images/ice2.png', category: 3},
-                { id: 24, name: '카라멜마끼아또', type: 'ICE', price: 3000,quantity:1 ,img:'images/ice2.png', category: 4},
-                { id: 25, name: '카페모카', type: 'HOT', price: 3000,quantity:1 ,img:'images/hot1.png', category: 4},
-                { id: 26, name: '카페모카', type: 'ICE', price: 3300,quantity:1 ,img:'images/ice1.png', category: 4},
-                { id: 27, name: '딥카페라테', type: 'HOT', price: 3400,quantity:1 ,img:'images/hot2.png', category: 4},
-                { id: 28, name: '딥카페라테', type: 'ICE', price: 3700,quantity:1 ,img:'images/ice2.png', category: 4},
+                { id: 12, name: 'D아메리카노', type: 'HOT', price: 1000,quantity:1 ,img:'images/hot1.png', category: 1},
+                { id: 13, name: 'D아메리카노', type: 'ICE', price: 1300,quantity:1 ,img:'images/ice1.png', category: 2},
+                { id: 14, name: 'D바닐라라떼', type: 'HOT', price: 2500,quantity:1 ,img:'images/hot2.png', category: 2},
+                { id: 15, name: 'D바닐라라떼', type: 'ICE', price: 2800,quantity:1 ,img:'images/ice2.png', category: 2},
+                { id: 16, name: 'D연유라떼', type: 'HOT', price: 2500,quantity:1 ,img:'images/hot1.png', category: 2},
+                { id: 17, name: 'D연유라떼', type: 'ICE', price: 2800,quantity:1 ,img:'images/ice1.png', category: 2},
+                { id: 18, name: 'D카라멜마끼아또', type: 'HOT', price: 2800,quantity:1 ,img:'images/hot2.png', category: 2},
+                { id: 19, name: 'D카라멜마끼아또', type: 'ICE', price: 3000,quantity:1 ,img:'images/ice2.png', category: 2},
+                { id: 20, name: 'D카페모카', type: 'HOT', price: 3000,quantity:1 ,img:'images/hot1.png', category: 2},
+                { id: 21, name: 'D카페모카', type: 'ICE', price: 3300,quantity:1 ,img:'images/ice1.png', category: 2},
+                { id: 22, name: 'D딥카페라테', type: 'HOT', price: 3400,quantity:1 ,img:'images/hot2.png', category: 2},
+                { id: 23, name: 'D딥카페라테', type: 'ICE', price: 3700,quantity:1 ,img:'images/ice2.png', category: 2},
+                
                 
                 ];
 
@@ -90,45 +84,53 @@
             //  let menu-container = document.getElementById('menu-container');
              let list = document.getElementById('list');
              let total_display = document.getElementById('total_display');
-             let menuBtn = document.querySelectorAll('.menuBtn');
+             let menuBtn = document.querySelectorAll('.menu-tab .menuBtn');
+             let left_down = document.getElementById('left_down');
              let cateNum = 0;
-             let filterMenu = menus.filter((item) => {
-                return item.category
-             })
-
+             
              console.log()
              //메뉴화면 표시(3*4 표시는 CSS로 처리)
-             let result01 = '';  //메뉴화면 표시
-             function display(){
+            //  function printMenu(cateNum){
 
-                 let count = 0;
-                 for(let i=0; i<7; i++){
+                 
+                 
+            function display(cateNum){
+                
+                let filterMenu = menus.filter((item) => {
+                    return item.category === cateNum;
+                })
+                
+                console.log(cateNum);
+                    let result01 = '';  //메뉴화면 표시
+                    // let i = 0;
+                    // for(let i=0; i<menus.length; i++){
                      result01 += `<ul>`;
-                        for(let j=0; j<4; j++){
-                            result01 += `<li onclick='choose(${count})'><img src="${menus[count].img}" alt="${menus[count].name}">
-                                <div class="menu-type">${menus[count].type}</div>
-                                <div class="menu-name">${menus[count].name}</div>
-                                <div class="menu-price">${menus[count].price}</div></li>`;  
-                                count++;                          
+                        for(let i=0; i<filterMenu.length; i++){
+                            result01 += `<li onclick='choose(${filterMenu[i].id})'><img src="${filterMenu[i].img}" alt="${filterMenu[i].name}">
+                                <div class="menu-type">${filterMenu[i].type}</div>
+                                <div class="menu-name">${filterMenu[i].name}</div>
+                                <div class="menu-price">${filterMenu[i].price}</div></li>`;  
+                                i++;                          
                             }
                             result01 += `</ul>`;
-                        }
+                        // }
                         left_down.innerHTML = result01;
                         getTotal();
-                    };
+                        }; 
+                        
+                        display(1);
+                     
+                        // 버튼 반복 : 추가코드
+                        for(let i=0; i<menuBtn.length; i++){
+                                menuBtn[i].addEventListener('click', () =>{
+                                    let cartIndex = i + 1;
+                                    display(cartIndex);
+                                })
+                            }
                     
-                    display();
-            
-                function chooseMenu(cateNum){
-                    let filterMenu = menus.filter((item) =>{
-                        return item.category === cateNum;
-                    })
 
-                    display(cateNum);
-                }
-                    
-                    // 자바 check = -1; => 주문내역에 상품이 존재하는지 유무를 판단
-                    function choose(id){
+                // 자바 check = -1; => 주문내역에 상품이 존재하는지 유무를 판단
+                 function choose(id){
                         console.log(id);
                         //동일 아이템 확인
                         let check = -1;
@@ -169,47 +171,39 @@
                                 // getTotal(i);
                             }
                             // 총 주문금액 함수
-                function getTotal(i){
-                let total = 0; // 총 주문금액
-                            
-                for(let i=0; i<cart.length; i++){
-                    total += Number((cart[i].quantity * cart[i].price));
-                }
-                total_display.innerHTML = `총 주문금액 : <span class='total'>${total.toLocaleString()}</span>`;
-             }
-            // 플러스
-            function plus(i){
-                cart[i].quantity++;
-                getTotal(i);
-                render();
-            }
-            // 마이너스
-            function minus(i){
-                if(cart[i].quantity<=1){
-                    alert('현재 주문수량이 1입니다. 목록을 삭제하시려면 X를 누르세요');
-                }else{
-                    cart[i].quantity--;
+                    function getTotal(i){
+                        let total = 0; // 총 주문금액
+                                    
+                        for(let i=0; i<cart.length; i++){
+                            total += Number((cart[i].quantity * cart[i].price));
+                        }
+                        total_display.innerHTML = `총 주문금액 : <span class='total'>${total.toLocaleString()}</span>`;
+                    }
+
+                // 플러스
+                function plus(i){
+                    cart[i].quantity++;
                     getTotal(i);
                     render();
                 }
-            }
-            // 삭제
-            function del(i){
-                alert(`${cart[i].name}를(을) 목록에서 제거합니다.`);
-                cart.splice(i, 1);
-                getTotal(i);
-                render();
+                // 마이너스
+                function minus(i){
+                    if(cart[i].quantity<=1){
+                        alert('현재 주문수량이 1입니다. 목록을 삭제하시려면 X를 누르세요');
+                    }else{
+                        cart[i].quantity--;
+                        getTotal(i);
+                        render();
+                    }
+                }
+                // 삭제
+                function del(i){
+                    alert(`${cart[i].name}를(을) 목록에서 제거합니다.`);
+                    cart.splice(i, 1);
+                    getTotal(i);
+                    render();
             }
 
         </script>
-
-
-
-
-
-
-    </div>
-
-    
 </body>
 </html>
